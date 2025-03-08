@@ -4,3 +4,8 @@ remote_theme: "jekyll/minima@1e8a445"
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 - jekyll-titles-from-headings
+
+titles_from_headings:
+  enabled:     true
+  strip_title: true
+  collections: true
