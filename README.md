@@ -1,7 +1,5 @@
----
-title: "Investigating the Relationship Between Recipe Tags and Ratings"
----
-# Title Override
+
+# Investigating the Relationship Between Recipe Tags and Ratings
 a DSC80 project
 
 ### Introduction
