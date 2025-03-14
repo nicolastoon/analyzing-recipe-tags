@@ -192,7 +192,7 @@ The first five rows of the cleaned DataFrame are shown below:
 | millionaire pound cake               | 286009 |       120 |         7 |               7 |            5 |           1 |       20 |   2008 |
 | 2000 meatloaf                        | 475785 |        90 |        17 |              13 |            5 |           2 |       10 |   2012 |
 
-Because the columns <code>'nutrition'</code>, <code>'nutrition'</code>, and <code>'nutrition'</code> are lists within the DataFrame, we extracted the lists into separate DataFrames, with row order preserved (so the first row of the new DataFrames will correspond to the same recipe as the first row of the cleaned DataFrame). In <code>ingredients_df</code> and <code>tags_df</code>, 1 represents that the recipe contains the ingredient/tag and 0 represents that the recipe does not contain the ingredient/tag.
+Because the columns <code>'nutrition'</code>, <code>'ingredients'</code>, and <code>'tags'</code> are lists within the DataFrame, we extracted the lists into separate DataFrames, with row order preserved (so the first row of the new DataFrames will correspond to the same recipe as the first row of the cleaned DataFrame). In <code>ingredients_df</code> and <code>tags_df</code>, 1 represents that the recipe contains the ingredient/tag and 0 represents that the recipe does not contain the ingredient/tag.
 
 The first two rows of each new DataFrame are shown below:
 
@@ -217,7 +217,7 @@ The first two rows of each new DataFrame are shown below:
 |             1 |              1 |        1 |                 1 |         0 |      0 |          0 |         0 |                  0 |                    1 |           0 |                 0 |                    0 |      0 |                    1 |            0 |                    0 |                 0 |            0 |          0 |            0 |                0 |         0 |          1 |                 0 |             0 |                       0 |           0 |            0 |               0 |             0 |                   0 |             0 |              0 |            0 |          0 |                       0 |            0 |             0 |          0 |               0 |           0 |         0 |       0 |              0 |         0 |         0 |       1 |              0 |            0 |                  1 |              0 |          0 |        0 |               0 |      0 |           0 |        0 |        0 |         0 |                   0 |       0 |           0 |        0 |             0 |       0 |
 |             1 |              1 |        0 |                 0 |         0 |      0 |          0 |         1 |                  0 |                    1 |           0 |                 0 |                    0 |      0 |                    1 |            0 |                    0 |                 0 |            0 |          0 |            0 |                1 |         0 |          0 |                 0 |             0 |                       0 |           0 |            0 |               0 |             0 |                   0 |             0 |              0 |            0 |          1 |                       0 |            0 |             0 |          0 |               0 |           0 |         0 |       0 |              0 |         0 |         0 |       0 |              0 |            0 |                  1 |              0 |          0 |        0 |               0 |      0 |           0 |        0 |        0 |         0 |                   0 |       0 |           0 |        0 |             0 |       0 |
 
-#### Univariate Analysis
+#### <b>Univariate Analysis</b>
 To initially explore the data, I examined the distribution of ratings for recipes.
 
 <iframe
@@ -240,7 +240,7 @@ I also examined the distribution of the number of tags for each recipe.
 
 The distribution of the histogram is approximately normal with an approximate mean of 16.3 and an approximate standard deviation of 6.8. This suggests that recipes can be expected to have anywhere from 10 to 23 tags, using the empirical rule. In addition, the dataset seems to contain outliers that have over 40 tags!
 
-#### Bivariate Analysis
+#### <b>Bivariate Analysis</b>
 For further exploration, I was curious about if there were any tags that became more popular as the years passed, so I plotted the proportion of each tag's usage over time.
 
 <iframe
@@ -250,7 +250,7 @@ For further exploration, I was curious about if there were any tags that became 
   frameborder="0"
 ></iframe>
 
-We can see that most tags don't have much usage, only making up less than 4% of all tags used. There are a few tags that are frequently used, such as <code>preparation</code>, <code>time-to-make</code>, and <code>course</code>. The line graph is a bit cluttered, so let's only take the five most variable lines (lines that have the greatest minimum and maximum proportion).
+We can see that most tags don't have much usage, only making up less than 4% of all tags used. There are a few tags that are frequently used, such as <code>'preparation'</code>, <code>'time-to-make'</code>, and <code>'course'</code>. The line graph is a bit cluttered, so let's only take the five most variable lines (lines that have the greatest minimum and maximum proportion).
 
 <iframe
   src="plots/top-5-line.html"
@@ -259,26 +259,69 @@ We can see that most tags don't have much usage, only making up less than 4% of 
   frameborder="0"
 ></iframe>
 
-The three tags mentioned earlier, <code>preparation</code>, <code>time-to-make</code>, and <code>course</code>, also have a lot of variance. The tag <code>60-minutes-or-less</code> had a big jump in usage in 2015! On the other hand,the tag <code>easy</code> actually had a great decrease in 2018, meaning the usage for the tag significantly dropped in recipes posted in 2018!
+The three tags mentioned earlier, <code>'preparation'</code>, <code>'time-to-make'</code>, and <code>'course'</code>, also have a lot of variance. The tag <code>'60-minutes-or-less'</code> had a big jump in usage in 2015! On the other hand,the tag <code>'easy'</code> actually had a great decrease in 2018, meaning the usage for the tag significantly dropped in recipes posted in 2018!
 
-#### Interesting Aggregates
-I was curious whether recipes with a certain tag had attributes that recipes without that tag didn't have. For this investigation, I utilized the <code>dietary</code> tag, and grouped recipes with and without the tag. Then, I took the mean of the nutritional values for each group. The aggregation is shown in the DataFrame below:
+#### <b>Interesting Aggregates</b>
+I was curious whether recipes with a certain tag had attributes that recipes without that tag didn't have. For this investigation, I utilized the <code>'dietary'</code> tag, and grouped recipes with and without the tag. Then, I took the mean of the nutritional values for each group. The aggregation is shown in the DataFrame below:
 
 | dietary   |   calories (#) |   total fat (PDV) |   sugar (PDV) |   sodium (PDV) |   protein (PDV) |   saturated fat (PDV) |   carbohydrates (PDV) |
 |:----------|---------------:|------------------:|--------------:|---------------:|----------------:|----------------------:|----------------------:|
 | False     |          326.7 |                23 |            23 |             16 |              20 |                    26 |                     9 |
 | True      |          292.6 |                18 |            23 |             13 |              17 |                    18 |                     9 |
 
-The DataFrame shows that nutritional values in recipes with the <code>dietary</code> tag were consistently less than or equal to nutritional values in recipes without the <code>dietary</code> tag. This suggests that there is a difference between the two groups, but is this difference significant or not?
+The DataFrame shows that nutritional values in recipes with the <code>'dietary'</code> tag were consistently less than or equal to nutritional values in recipes without the <code>'dietary'</code> tag. This suggests that there is a difference between the two groups, but is this difference significant or not?
 
-### <b>Assessment of Missingness</b>
-By taking a look at the columns in the cleaned dataset, there are two columns with a significant number of missing values: <code>description</code> and <code>rating</code>
+### <strong>Assessment of Missingness</strong>
+By taking a look at the columns in the cleaned dataset, there are two columns with a significant number of missing values: <code>'description'</code> and <code>'avg_rating'</code>
 
-#### NMAR Analysis
-I believe that the missingness of the 'description' column is NMAR (not missing at random) because the values of <code>description</code> depends on whether the contributor submitted a description or not. There could be a variety of reasons that causes a contributor to not submit a description (forgetfulness, complicated details, self-explanatory recipe, etc.). One variable that we could collect to explain the missingness of the data is whether the contributor is part of a company or is known to be a cooking influencer, since contributors who are well established/dedicated to recipe-making often add descriptions. If the dataset included this variable, then it might be probable that <code>description</code> is MAR (missing at random).
+#### <b>NMAR Analysis</b>
+I believe that the missingness of <code>'description'</code> is NMAR (not missing at random) because the values of <code>'description'</code> depends on whether the contributor submitted a description or not. There could be a variety of reasons that causes a contributor to not submit a description (forgetfulness, complicated details, self-explanatory recipe, etc.). One variable that we could collect to explain the missingness of the data is whether the contributor is part of a company or is known to be a cooking influencer, since contributors who are well established/dedicated to recipe-making often add descriptions. If the dataset included this variable, then it might be probable that <code>description</code> is MAR (missing at random).
 
-### <b>Hypothesis Testing</b>
-### <b>Framing a Prediction Problem</b>
-### <b>Baseline Model</b>
-### <b>Final Model</b>
-### <b>Fairness Analysis</b>
+#### <b>Missingness Dependency</b>
+I suspect that the missingness of <code>'avg_rating'</code> is MAR (missing at random). In other words, the missingness of <code>'avg_rating'</code> is related to the values of another column. The first column I will investigate is <code>minutes</code>.
+
+<p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the recipe time.</p>
+<p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the recipe time.</p>
+<p><b>Test Statistic: </b>The absolute difference in recipe time between rows missing and not missing <code>'avg_rating'</code>.</p>
+<p><b>Significance Level: </b>0.01</p>
+
+The observed test statistic between recipes with and without a rating was approximately 117.34.
+
+To see if my test statistic was significant, I conducted a permutation test and ran 1,000 simulations to generate an empirical distribution of the test statistic under the null hypothesis. The plot below visualizes the empirical distribution found:
+
+<iframe
+  src="plots/missingness-minutes-hist.html"
+  width="750"
+  height="550"
+  frameborder="0"
+></iframe>
+
+The p-value I calculated was 0.041, which is greater than the significance level of 0.01. Thus, we fail to reject the null hypothesis, which implies that the values of <code>minutes</code> does not have a correlation with the missingness of <code>avg_rating</code>.
+
+So far, the missingness of <code>avg_rating</code> has not been proven to be MAR yet. However, let's test another variable: <code>n_tags</code>.
+
+<p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the number of tags.</p>
+<p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the number of tags.</p>
+<p><b>Test Statistic: </b>The absolute difference in the number of tags between rows missing and not missing <code>'avg_rating'</code>.</p>
+<p><b>Significance Level: </b>0.01</p>
+
+The observed test statistic between recipes with and without a rating was approximately 0.94.
+
+Again, to see if my test statistic was significant, I conducted a permutation test and ran 1,000 simulations to generate an empirical distribution of the test statistic under the null hypothesis. The plot below visualizes the empirical distribution found:
+
+<iframe
+  src="plots/missingness-tags-hist.html"
+  width="750"
+  height="550"
+  frameborder="0"
+></iframe>
+
+The p-value I calculated 0, which is less than the significance level of 0.01. Thus, we are able to reject the null hypothesis, which strongly suggests that the values of <code>n_tags</code> does have a correlation with the missingness of <code>avg_rating</code>.
+
+### <strong>Hypothesis Testing</strong>
+
+
+### <strong>Framing a Prediction Problem</strong>
+### <strong>Baseline Model</strong>
+### <strong>Final Model</strong>
+### <strong>Fairness Analysis</strong>
