@@ -176,8 +176,11 @@ The first five rows of the cleaned DataFrame are shown below:
 
 | name                                 |     id |   minutes |   n_steps |   n_ingredients |   avg_rating |   n_ratings |   n_tags |   year |
 |:-------------------------------------|-------:|----------:|----------:|----------------:|-------------:|------------:|---------:|-------:|
-| 1 brownies in the world best ever    | 333281 |        40 |        10 |               9 |            4 |           1 |       14 |   2008 |
+| 1 brownies in the world    best ever | 333281 |        40 |        10 |               9 |            4 |           1 |       14 |   2008 |
 | 1 in canada chocolate chip cookies   | 453467 |        45 |        12 |              11 |            5 |           1 |        9 |   2011 |
+| 412 broccoli casserole               | 306168 |        40 |         6 |               9 |            5 |           4 |       10 |   2008 |
+| millionaire pound cake               | 286009 |       120 |         7 |               7 |            5 |           1 |       20 |   2008 |
+| 2000 meatloaf                        | 475785 |        90 |        17 |              13 |            5 |           2 |       10 |   2012 |
 
 ### <b>Assessment of Missingness</b>
 ### <b>Hypothesis Testing</b>
