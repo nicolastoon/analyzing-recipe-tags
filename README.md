@@ -173,10 +173,13 @@ To make the data exploration process easier, the following steps were executed, 
 </ol>
 
 The first five rows of the cleaned DataFrame are shown below:
+
 | name                                 |     id |   minutes |   n_steps |   n_ingredients |   avg_rating |   n_ratings |   n_tags |   year |
+
 |:-------------------------------------|-------:|----------:|----------:|----------------:|-------------:|------------:|---------:|-------:|
-| 1 brownies in the world    best ever | 333281 |        40 |        10 |               9 |            4 |           1 |       14 |   2008 |
+| 1 brownies in the world best ever    | 333281 |        40 |        10 |               9 |            4 |           1 |       14 |   2008 |
 | 1 in canada chocolate chip cookies   | 453467 |        45 |        12 |              11 |            5 |           1 |        9 |   2011 |
+
 ### <b>Assessment of Missingness</b>
 ### <b>Hypothesis Testing</b>
 ### <b>Framing a Prediction Problem</b>
