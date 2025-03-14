@@ -1,6 +1,6 @@
 
-# Investigating the Relationship Between Recipe Tags and Ratings
-a DSC80 project
+# Investigating the Significance of Recipe Tags
+<p style="text-align:center;">a DSC 80 project</p>
 
 ### Introduction
 ### Data Cleaning and Exploratory Data Analysis
