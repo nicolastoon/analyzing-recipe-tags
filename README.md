@@ -1,6 +1,5 @@
 
 # Investigating the Significance of Recipe Tags
-title:wow
 <p style="text-align:center;">a DSC 80 project — Nicolas Toon</p>
 
 ### <b>Introduction</b>
@@ -10,7 +9,7 @@ Similar to social media, most online recipes contain tags that help expand their
 
 In this project, I examined two datasets originally scraped by <a href='https://cseweb.ucsd.edu/~jmcauley/pdfs/emnlp19c.pdf'>Majumder, et al.</a>, which compiled recipe details and reviews posted on <a href='https://www.food.com/'>food.com</a> from 2008 to 2018.
 
-The first dataset contains 83,782 rows, with each row denoting a unique recipe. Each unique recipe has 12 features:
+The first dataset, <code>recipes</code>, contains 83,782 rows, with each row denoting a unique recipe. Each unique recipe has 12 features:
 <table>
   <tr>
     <th>Feature</th>
@@ -66,7 +65,7 @@ The first dataset contains 83,782 rows, with each row denoting a unique recipe. 
   </tr>
 </table>
 
-The second dataset contains 731,927 rows, with each row denoting a unique review. Each unique review has 5 features:
+The second dataset, <code>interactions</code>, contains 731,927 rows, with each row denoting a unique review. Each unique review has 5 features:
 <table>
   <tr>
     <th>Feature</th>
@@ -94,10 +93,58 @@ The second dataset contains 731,927 rows, with each row denoting a unique review
   </tr>
 </table>
 
-### Data Cleaning and Exploratory Data Analysis
-### Assessment of Missingness
-### Hypothesis Testing
-### Framing a Prediction Problem
-### Baseline Model
-### Final Model
-### Fairness Analysis
+### <b>Data Cleaning and Exploratory Data Analysis</b>
+#### Data Cleaning
+To make the data exploration process easier, the following steps were executed, in order:
+<ol type=1>
+  <li>Left merging the <code>recipes</code> and <code>interactions</code> datasets on the recipe id</li>
+    <ol>
+      <li>This matches each review with its corresponding recipe, making it easier to associate ratings with recipes.</li>
+    </ol>
+    
+  <li>Replacing all zeroes with <code>np.nan</code></li>
+    <ol>
+      <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
+    </ol>
+
+  <li>Replacing all zeroes with <code>np.nan</code></li>
+    <ol>
+      <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
+    </ol>
+  <li>Left merging the <code>recipes</code> and <code>interactions</code></li> datasets on the recipe id
+    <ol>
+      <li>This matches each review with its corresponding recipe, making it easier to associate ratings with recipes.</li>
+    </ol>
+  <li>Replacing all zeroes with <code>np.nan</code></li>
+    <ol>
+      <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
+    </ol>
+  <li>Replacing all zeroes with <code>np.nan</code></li>
+    <ol>
+      <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
+    </ol>
+  <li>Replacing all zeroes with <code>np.nan</code></li>
+    <ol>
+      <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
+    </ol>
+  <li>Left merging the <code>recipes</code> and <code>interactions</code> datasets on the recipe id</li>
+    <ol>
+      <li>This matches each review with its corresponding recipe, making it easier to associate ratings with recipes.</li>
+    </ol>
+  <li>Replacing all zeroes with <code>np.nan</code></li>
+    <ol>
+      <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
+    </ol>
+  <li>Replacing all zeroes with <code>np.nan</code></li>
+    <ol>
+      <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
+    </ol>
+
+</ol>
+
+### <b>Assessment of Missingness</b>
+### <b>Hypothesis Testing</b>
+### <b>Framing a Prediction Problem</b>
+### <b>Baseline Model</b>
+### <b>Final Model</b>
+### <b>Fairness Analysis</b>
