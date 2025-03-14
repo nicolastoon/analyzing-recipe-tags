@@ -1,9 +1,8 @@
 
 # Investigating the Significance of Recipe Tags
-<p style="text-align:center;">a DSC 80 project</p>
-<p style="text-align:center;">Nicolas Toon</p>
+<p style="text-align:center;">a DSC 80 project — Nicolas Toon</p>
 
-### Introduction
+### <b>Introduction</b>
 Food is undoubtedly a significant part of human lives. We eat food to survive, yet it can be a significant detriment to our lives with too much consumption, as seen by the obesity epidemic in the United States. One solution to controlling consumption is cooking, so that the amount of ingredients and macronutrients can be controlled. Online recipes can be a great method to find something simple and quick to prep, yet healthy to eat.
 
 Similar to social media, most online recipes contain tags that help expand their outreach. The question I pose and strive to answer is: do more tags on a post lead to higher ratings?
