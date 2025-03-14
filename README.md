@@ -1,6 +1,6 @@
 
 # Investigating the Significance of Recipe Tags
-title=wow
+title:wow
 <p style="text-align:center;">a DSC 80 project — Nicolas Toon</p>
 
 ### <b>Introduction</b>
@@ -21,47 +21,47 @@ The first dataset contains 83,782 rows, with each row denoting a unique recipe. 
     <td>recipe name</td>
   </tr>
   <tr>
-    <td>`'id'`</td>
+    <td><code>'id'</code></td>
     <td>unique identifier</td>
   </tr>
   <tr>
-    <td>`'minutes'`</td>
+    <td><code>'minutes'</code></td>
     <td>estimated time</td>
   </tr>
   <tr>
-    <td>`'contributor_id'`</td>
+    <td><code>'contributor_id'</code></td>
     <td>unique identifier for user who posted the recipe</td>
   </tr>
   <tr>
-    <td>`'submitted'`</td>
+    <td><code>'submitted'</code></td>
     <td>posting date</td>
   </tr>
   <tr>
-    <td>`'tags'`</td>
+    <td><code>'tags'</code></td>
     <td>recipe tags</td>
   </tr>
   <tr>
-    <td>`'nutrition'`</td>
+    <td><code>'nutrition'</code></td>
     <td>nutritional information</td>
   </tr>
   <tr>
-    <td>`'n_steps'`</td>
+    <td><code>'n_steps'</code></td>
     <td>number of steps</td>
   </tr>
   <tr>
-    <td>`'steps'`</td>
+    <td><code>'steps'</code></td>
     <td>steps for recipe, in order</td>
   </tr>
   <tr>
-    <td>`'description'`</td>
+    <td><code>'description'</code></td>
     <td>user generated description</td>
   </tr>
   <tr>
-    <td>`'ingredients'`</td>
+    <td><code>'ingredients'</code></td>
     <td>ingredients used</td>
   </tr>
   <tr>
-    <td>`'n_ingredients'`</td>
+    <td><code>'n_ingredients'</code></td>
     <td>number of ingredients</td>
   </tr>
 </table>
@@ -73,23 +73,23 @@ The second dataset contains 731,927 rows, with each row denoting a unique review
     <th>Description</th>
   </tr>
   <tr>
-    <td>`'user_id'`</td>
+    <td><code>'user_id'</code></td>
     <td>unique identifier for reviewer</td>
   </tr>
   <tr>
-    <td>`'recipe_id'`</td>
+    <td><code>'recipe_id'</code></td>
     <td>unique identifier for the recipe the review is about</td>
   </tr>
   <tr>
-    <td>`'date'`</td>
+    <td><code>'date'</code></td>
     <td>review date</td>
   </tr>
   <tr>
-    <td>`'rating'`</td>
+    <td><code>'rating'</code></td>
     <td>rating given</td>
   </tr>
   <tr>
-    <td>`'review'`</td>
+    <td><code>'review'</code></td>
     <td>review/comment text</td>
   </tr>
 </table>
