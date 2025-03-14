@@ -1,5 +1,6 @@
 
 # Investigating the Significance of Recipe Tags
+title=wow
 <p style="text-align:center;">a DSC 80 project — Nicolas Toon</p>
 
 ### <b>Introduction</b>
@@ -16,7 +17,7 @@ The first dataset contains 83,782 rows, with each row denoting a unique recipe. 
     <th>Description</th>
   </tr>
   <tr>
-    <td>`'name'`</td>
+    <td><code>'name'</code></td>
     <td>recipe name</td>
   </tr>
   <tr>
