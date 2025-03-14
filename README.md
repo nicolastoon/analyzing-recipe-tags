@@ -121,50 +121,60 @@ To make the data exploration process easier, the following steps were executed, 
       <li>This matches each review with its corresponding recipe, making it easier to associate ratings with recipes.</li>
     </ul>
 
+
   <li>Replacing all zeroes with <code>np.nan</code></li>
     <ul>
       <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
     </ul>
+
 
   <li>Finding the average rating of each recipe</li>
     <ul>
       <li>Taking the mean of all ratings associated with each recipe allows us to generalize ratings from recipe to recipe.</li>
     </ul>
 
+
   <li>Keeping only unique recipes</li> 
     <ul>
       <li>Since merging resulting in duplicate recipes, and we only need to analyze recipes and not individual reviews, we can filter for unique recipes, so that recipes with more reviews don't count more than recipes with less reviews.</li>
     </ul>
+
 
   <li>Converting <code>'submitted'</code> to a datetime object</li>
     <ul>
       <li>Originally, <code>'submitted'</code> was a string, but by converting to a datetime object, we can manipulate the date easily.</li>
     </ul>
 
+
   <li>Converting <code>'nutrition'</code> to a list</li>
     <ul>
       <li>Originally, <code>'nutrition'</code> was a string, but by converting to a list, we can manipulate information from the nutritional values easily.</li>
     </ul>
+
 
   <li>Converting <code>'ingredients'</code> to a list</li>
     <ul>
       <li>Originally, <code>'ingredients'</code> was a string, but by converting to a list, we can manipulate information from the ingredients easily.</li>
     </ul>
 
+
   <li>Converting <code>'tags'</code> to a list</li>
     <ul>
       <li>Originally, <code>'tags'</code> was a string, but by converting to a list, we can manipulate information from the tags easily.</li>
     </ul>
+
 
   <li>Creating a column of <code>'n_tags'</code></li>
     <ul>
       <li><code>'n_tags'</code> is a column of integers that corresponds to the number of tags each recipe has, which will be useful in comparing recipes with more vs. less tags.</li>
     </ul>
     
+
   <li>Creating a column of <code>'year'</code></li>
     <ul>
       <li><code>'year'</code> is a column of integers that corresponds to the year that each recipe was posted, which will be useful for any time series analysis.</li>
     </ul>
+
 
   <li>Dropping any unnecessary/repetitive columns</li>
     <ul>
@@ -185,6 +195,7 @@ The first five rows of the cleaned DataFrame are shown below:
 Because the columns <code>'nutrition'</code>, <code>'nutrition'</code>, and <code>'nutrition'</code> are lists within the DataFrame, we extracted the lists into separate DataFrames, with row order preserved (so the first row of the new DataFrames will correspond to the same recipe as the first row of the cleaned DataFrame).
 
 The first two rows of each new DataFrame are shown below:
+
 <code>nutrition_df</code>
 
 |   calories (#) |   total fat (PDV) |   sugar (PDV) |   sodium (PDV) |   protein (PDV) |   saturated fat (PDV) |   carbohydrates (PDV) |
