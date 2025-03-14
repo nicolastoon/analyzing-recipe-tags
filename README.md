@@ -262,9 +262,21 @@ We can see that most tags don't have much usage, only making up less than 4% of 
 The three tags mentioned earlier, <code>preparation</code>, <code>time-to-make</code>, and <code>course</code>, also have a lot of variance. The tag <code>60-minutes-or-less</code> had a big jump in usage in 2015! On the other hand,the tag <code>easy</code> actually had a great decrease in 2018, meaning the usage for the tag significantly dropped in recipes posted in 2018!
 
 #### Interesting Aggregates
+I was curious whether recipes with a certain tag had attributes that recipes without that tag didn't have. For this investigation, I utilized the <code>dietary</code> tag, and grouped recipes with and without the tag. Then, I took the mean of the nutritional values for each group. The aggregation is shown in the DataFrame below:
 
+| dietary   |   calories (#) |   total fat (PDV) |   sugar (PDV) |   sodium (PDV) |   protein (PDV) |   saturated fat (PDV) |   carbohydrates (PDV) |
+|:----------|---------------:|------------------:|--------------:|---------------:|----------------:|----------------------:|----------------------:|
+| False     |          326.7 |                23 |            23 |             16 |              20 |                    26 |                     9 |
+| True      |          292.6 |                18 |            23 |             13 |              17 |                    18 |                     9 |
+
+The DataFrame shows that nutritional values in recipes with the <code>dietary</code> tag were consistently less than or equal to nutritional values in recipes without the <code>dietary</code> tag. This suggests that there is a difference between the two groups, but is this difference significant or not?
 
 ### <b>Assessment of Missingness</b>
+By taking a look at the columns in the cleaned dataset, there are two columns with a significant number of missing values: <code>description</code> and <code>rating</code>
+
+#### NMAR Analysis
+
+
 ### <b>Hypothesis Testing</b>
 ### <b>Framing a Prediction Problem</b>
 ### <b>Baseline Model</b>
