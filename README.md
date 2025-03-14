@@ -218,14 +218,27 @@ The first two rows of each new DataFrame are shown below:
 |             1 |              1 |        0 |                 0 |         0 |      0 |          0 |         1 |                  0 |                    1 |           0 |                 0 |                    0 |      0 |                    1 |            0 |                    0 |                 0 |            0 |          0 |            0 |                1 |         0 |          0 |                 0 |             0 |                       0 |           0 |            0 |               0 |             0 |                   0 |             0 |              0 |            0 |          1 |                       0 |            0 |             0 |          0 |               0 |           0 |         0 |       0 |              0 |         0 |         0 |       0 |              0 |            0 |                  1 |              0 |          0 |        0 |               0 |      0 |           0 |        0 |        0 |         0 |                   0 |       0 |           0 |        0 |             0 |       0 |
 
 #### Univariate Analysis
-For this project, we examined the distribution of ratings for recipes.
+For this project, I examined the distribution of ratings for recipes.
 
 <iframe
-  src="plots/avg-rating-hist.html"
-  width="800"
-  height="600"
+  src="plots/avg-ratings-hist.html"
+  width="600"
+  height="450"
   frameborder="0"
 ></iframe>
+
+As the histogram shows, ratings are significantly skewed left. This implies that there are more recipes on that are rated a 4 through 5, compared to 0 through 4, creating a massive class imbalance.
+
+I also examined the distribution of the number of tags for each recipe.
+
+<iframe
+  src="plots/n-tags-hist.html"
+  width="600"
+  height="450"
+  frameborder="0"
+></iframe>
+
+The distribution of the histogram is approximately normal with an approximate mean of 16.3 and an approximate standard deviation of 6.8. This suggests that recipes can be expected to have anywhere from 10 to 23 tags, using the empirical rule. In addition, the dataset seems to contain outliers that have over 40 tags!
 
 #### Bivariate Analysis
 
