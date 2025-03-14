@@ -275,7 +275,7 @@ The DataFrame shows that nutritional values in recipes with the <code>dietary</c
 By taking a look at the columns in the cleaned dataset, there are two columns with a significant number of missing values: <code>description</code> and <code>rating</code>
 
 #### NMAR Analysis
-
+I believe that the missingness of the 'description' column is NMAR (not missing at random) because the values of <code>description</code> depends on whether the contributor submitted a description or not. There could be a variety of reasons that causes a contributor to not submit a description (forgetfulness, complicated details, self-explanatory recipe, etc.). One variable that we could collect to explain the missingness of the data is whether the contributor is part of a company or is known to be a cooking influencer, since contributors who are well established/dedicated to recipe-making often add descriptions. If the dataset included this variable, then it might be probable that <code>description</code> is MAR (missing at random).
 
 ### <b>Hypothesis Testing</b>
 ### <b>Framing a Prediction Problem</b>
