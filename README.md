@@ -218,12 +218,12 @@ The first two rows of each new DataFrame are shown below:
 |             1 |              1 |        0 |                 0 |         0 |      0 |          0 |         1 |                  0 |                    1 |           0 |                 0 |                    0 |      0 |                    1 |            0 |                    0 |                 0 |            0 |          0 |            0 |                1 |         0 |          0 |                 0 |             0 |                       0 |           0 |            0 |               0 |             0 |                   0 |             0 |              0 |            0 |          1 |                       0 |            0 |             0 |          0 |               0 |           0 |         0 |       0 |              0 |         0 |         0 |       0 |              0 |            0 |                  1 |              0 |          0 |        0 |               0 |      0 |           0 |        0 |        0 |         0 |                   0 |       0 |           0 |        0 |             0 |       0 |
 
 #### Univariate Analysis
-For this project, I examined the distribution of ratings for recipes.
+To initially explore the data, I examined the distribution of ratings for recipes.
 
 <iframe
   src="plots/avg-ratings-hist.html"
-  width="600"
-  height="450"
+  width="750"
+  height="550"
   frameborder="0"
 ></iframe>
 
@@ -233,14 +233,33 @@ I also examined the distribution of the number of tags for each recipe.
 
 <iframe
   src="plots/n-tags-hist.html"
-  width="600"
-  height="450"
+  width="750"
+  height="550"
   frameborder="0"
 ></iframe>
 
 The distribution of the histogram is approximately normal with an approximate mean of 16.3 and an approximate standard deviation of 6.8. This suggests that recipes can be expected to have anywhere from 10 to 23 tags, using the empirical rule. In addition, the dataset seems to contain outliers that have over 40 tags!
 
 #### Bivariate Analysis
+For further exploration, I was curious about if there were any tags that became more popular as the years passed, so I plotted the proportion of each tag's usage over time.
+
+<iframe
+  src="plots/tag-props-line.html"
+  width="750"
+  height="550"
+  frameborder="0"
+></iframe>
+
+We can see that most tags don't have much usage, only making up less than 4% of all tags used. There are a few tags that are frequently used, such as <code>preparation</code>, <code>time-to-make</code>, and <code>course</code>. The line graph is a bit cluttered, so let's only take the five most variable lines (lines that have the greatest minimum and maximum proportion).
+
+<iframe
+  src="plots/top-5-line.html"
+  width="750"
+  height="550"
+  frameborder="0"
+></iframe>
+
+The three tags mentioned earlier, <code>preparation</code>, <code>time-to-make</code>, and <code>course</code>, also have a lot of variance. The tag <code>60-minutes-or-less</code> had a big jump in usage in 2015! On the other hand,the tag <code>easy</code> actually had a great decrease in 2018, meaning the usage for the tag significantly dropped in recipes posted in 2018!
 
 #### Interesting Aggregates
 
