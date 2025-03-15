@@ -302,9 +302,9 @@ To see if my test statistic was significant, I conducted a permutation test and 
 
 The p-value I calculated was 0.041, which is greater than the significance level of 0.01. Thus, we fail to reject the null hypothesis, which implies that the values of <code>minutes</code> does not have a correlation with the missingness of <code>avg_rating</code>.
 
----
-
 So far, the missingness of <code>avg_rating</code> has not been proven to be MAR yet. However, let's test another variable: <code>n_tags</code>.
+
+---
 
 <p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the number of tags.</p>
 <p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the number of tags.</p>
@@ -329,14 +329,18 @@ This hypothesis test will aim to answer to our original question proposed in the
 
 The tag that we will use is <code>'dietary'</code>. We previously saw in our "Interesting Aggregates" that there seemed to be a difference between the nutritional values between recipes with and without the tag. Logically, if one wants to go on a diet, they would generally want to eat less calories. Thus, this hypothesis test will see if the difference in calories in the two groups is significant or not.
 
+For our hypothesis test, we will be running a permutation test since we want to compare whether recipes with and without the <code>dietary</code> tag have similar distributions and populations.
+
+For our test statistic, I will use the absolute difference in mean calories. The absolute difference in means is useful because we have two groups, each with a quantitative mean that looks to be different from the other group. By comparing the simulated and observed test statistics, we can see if our observation is significant or not.
+
 <p><b>Null Hypothesis: </b>Recipes with the <code>dietary</code> tag have the same amount of calories as recipes without the <code>dietary</code> tag.</p>
 <p><b>Alternate Hypothesis: </b>Recipes with the <code>dietary</code> tag have less calories as recipes without the <code>dietary</code> tag</p>
-<p><b>Test Statistic: </b>Absolute difference of mean ratings between recipes with and without the <code>dietary</code> tag</p>
+<p><b>Test Statistic: </b>Absolute difference of mean calories between recipes with and without the <code>dietary</code> tag</p>
 <p><b>Significance Level: </b>0.01</p>
 
 The observed test statistic between recipes with and without <code>'dietary'</code> was approximately 34.1.
 
-To see if my test statistic was significant, I conducted a permutation test and ran 1,000 simulations to generate an empirical distribution of the test statistic under the null hypothesis. The plot below visualizes the empirical distribution found:
+To see if my test statistic was significant, I ran 1,000 simulations to generate an empirical distribution of the test statistic under the null hypothesis. The plot below visualizes the empirical distribution found:
 
 <iframe
   src="plots/hypothesis-test-hist.html"
@@ -348,6 +352,10 @@ To see if my test statistic was significant, I conducted a permutation test and 
 The p-value I calculated was 0, which is less than the significance level of 0.01. Thus, we are able to reject the null hypothesis. This outcome strongly suggests that the dietary tag is representative of dietary calorie levels.
 
 ### <strong>Framing a Prediction Problem</strong>
+From the perspective of the person posting the recipe, it would be very useful to know if certain tags are representative of their recipe, as to not mislead their audience. 
+
+Because this investigation has found distinct characteristics of the dietary tag,  this suggests that there will be features in our dataset that can predict whether or not a given recipe should have the dietary tag. Thus, the model will be predicting whether or not a recipe should have the dietary tag.
+
 ### <strong>Baseline Model</strong>
 ### <strong>Final Model</strong>
 ### <strong>Fairness Analysis</strong>
