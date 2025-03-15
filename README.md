@@ -352,10 +352,19 @@ To see if my test statistic was significant, I ran 1,000 simulations to generate
 The p-value I calculated was 0, which is less than the significance level of 0.01. Thus, we are able to reject the null hypothesis. This outcome strongly suggests that the dietary tag is representative of dietary calorie levels.
 
 ### <strong>Framing a Prediction Problem</strong>
-From the perspective of the person posting the recipe, it would be very useful to know if certain tags are representative of their recipe, as to not mislead their audience. 
+From the perspective of the person posting the recipe, it would be very useful to know if certain tags are representative of their recipe, as to not mislead their audience, but at the same time, it would be bad if the missing tag costed the person million of views, potentially. 
 
 Because this investigation has found distinct characteristics of the dietary tag,  this suggests that there will be features in our dataset that can predict whether or not a given recipe should have the dietary tag. Thus, the model will be predicting whether or not a recipe should have the dietary tag.
 
+This model will be performing binary classification: 0 if the model predicts that the recipe should not have the <code>'dietary'</code> tag and 1 if the model predicts that the recipe should have the <code>'dietary'</code> tag. To perform this classification, a random forest classifier will be used.
+
+To evaluate the performance of the model, f1 score will be utilized. Although accuracy is useful to just determine whether the predictions are correct, the original purpose of creating this model was to figure out whether tags were representative of their recipe, yet also get as many views as possible. As a result, we want to minimize both false positives and false negatives, so f1 score is the best metric to measure this.
+
+From the perspective of the person posting the recipe, the only information that we would know are the recipe details. This would include ingredients, nutrients, estimated time, steps, etc. The model will be using features from this pool.
+
 ### <strong>Baseline Model</strong>
+The features the baseline model will use are: 
+
+
 ### <strong>Final Model</strong>
 ### <strong>Fairness Analysis</strong>
