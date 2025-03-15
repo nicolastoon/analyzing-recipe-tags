@@ -5,7 +5,7 @@
 ### <strong>Introduction</strong>
 Food is undoubtedly a significant part of human lives. We eat food to survive, yet it can be a significant detriment to our lives with too much consumption, as seen by the obesity epidemic in the United States. One solution to controlling consumption is cooking, so that the amount of ingredients and macronutrients can be controlled. Online recipes can be a great method to find something simple and quick to prep, yet healthy to eat.
 
-Similar to social media, most online recipes contain tags that help expand their outreach. The question I pose and strive to answer is: do more tags on a post lead to higher ratings?
+Similar to social media, most online recipes contain tags that help expand their audience. However, many posts put lots of tags in order to maximize outreach. The question I pose and strive to answer is: are tags representative of the content they are on?
 
 In this project, I examined two datasets originally scraped by <a href='https://cseweb.ucsd.edu/~jmcauley/pdfs/emnlp19c.pdf'>Majumder, et al.</a>, which compiled recipe details and reviews posted on <a href='https://www.food.com/'>food.com</a> from 2008 to 2018.
 
@@ -196,21 +196,21 @@ Because the columns <code>'nutrition'</code>, <code>'ingredients'</code>, and <c
 
 The first two rows of each new DataFrame are shown below:
 
-<code>nutrition_df</code>
+<code>nutrition_df</code>:
 
 |   calories (#) |   total fat (PDV) |   sugar (PDV) |   sodium (PDV) |   protein (PDV) |   saturated fat (PDV) |   carbohydrates (PDV) |
 |---------------:|------------------:|--------------:|---------------:|----------------:|----------------------:|----------------------:|
 |          138.4 |                10 |            50 |              3 |               3 |                    19 |                     6 |
 |          595.1 |                46 |           211 |             22 |              13 |                    51 |                    26 |
 
-<code>ingredients_df</code>
+<code>ingredients_df</code>:
 
 |   salt |   butter |   sugar |   onion |   olive oil |   water |   garlic cloves |   eggs |   milk |   pepper |   flour |   all-purpose flour |   brown sugar |   baking powder |   egg |   salt and pepper |   parmesan cheese |   black pepper |   lemon juice |   vegetable oil |   baking soda |   garlic clove |   cinnamon |   garlic powder |   tomatoes |
 |-------:|---------:|--------:|--------:|------------:|--------:|----------------:|-------:|-------:|---------:|--------:|--------------------:|--------------:|----------------:|------:|------------------:|------------------:|---------------:|--------------:|----------------:|--------------:|---------------:|-----------:|----------------:|-----------:|
 |      1 |        1 |       1 |       0 |           0 |       0 |               0 |      1 |      0 |        0 |       1 |                   1 |             0 |               0 |     1 |                 0 |                 0 |              0 |             0 |               0 |             0 |              0 |          0 |               0 |          0 |
 |      1 |        0 |       1 |       0 |           0 |       1 |               0 |      1 |      0 |        0 |       1 |                   1 |             1 |               0 |     1 |                 0 |                 0 |              0 |             0 |               0 |             1 |              0 |          0 |               0 |          0 |
 
-<code>tags_df</code>
+<code>tags_df</code>:
 
 |   preparation |   time-to-make |   course |   main-ingredient |   dietary |   easy |   occasion |   cuisine |   low-in-something |   60-minutes-or-less |   main-dish |   3-steps-or-less |   30-minutes-or-less |   meat |   number-of-servings |   vegetables |   15-minutes-or-less |   4-hours-or-less |   taste-mood |   low-carb |   low-sodium |   north-american |   healthy |   desserts |   low-cholesterol |   low-calorie |   5-ingredients-or-less |   equipment |   vegetarian |   beginner-cook |   low-protein |   low-saturated-fat |   inexpensive |   dinner-party |   for-1-or-2 |   american |   pasta-rice-and-grains |   eggs-dairy |   side-dishes |   european |   holiday-event |   weeknight |   poultry |   fruit |   kid-friendly |   low-fat |   chicken |   lunch |   comfort-food |   appetizers |   for-large-groups |   presentation |   seasonal |   brunch |   one-dish-meal |   beef |   breakfast |   salads |   breads |   seafood |   free-of-something |   asian |   beverages |   cheese |   soups-stews |   pasta |
 |--------------:|---------------:|---------:|------------------:|----------:|-------:|-----------:|----------:|-------------------:|---------------------:|------------:|------------------:|---------------------:|-------:|---------------------:|-------------:|---------------------:|------------------:|-------------:|-----------:|-------------:|-----------------:|----------:|-----------:|------------------:|--------------:|------------------------:|------------:|-------------:|----------------:|--------------:|--------------------:|--------------:|---------------:|-------------:|-----------:|------------------------:|-------------:|--------------:|-----------:|----------------:|------------:|----------:|--------:|---------------:|----------:|----------:|--------:|---------------:|-------------:|-------------------:|---------------:|-----------:|---------:|----------------:|-------:|------------:|---------:|---------:|----------:|--------------------:|--------:|------------:|---------:|--------------:|--------:|
@@ -228,6 +228,8 @@ To initially explore the data, I examined the distribution of ratings for recipe
 ></iframe>
 
 As the histogram shows, ratings are significantly skewed left. This implies that there are more recipes on that are rated a 4 through 5, compared to 0 through 4, creating a massive class imbalance.
+
+---
 
 I also examined the distribution of the number of tags for each recipe.
 
@@ -280,6 +282,8 @@ I believe that the missingness of <code>'description'</code> is NMAR (not missin
 #### <b>Missingness Dependency</b>
 I suspect that the missingness of <code>'avg_rating'</code> is MAR (missing at random). In other words, the missingness of <code>'avg_rating'</code> is related to the values of another column. The first column I will investigate is <code>minutes</code>.
 
+---
+
 <p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the recipe time.</p>
 <p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the recipe time.</p>
 <p><b>Test Statistic: </b>The absolute difference in recipe time between rows missing and not missing <code>'avg_rating'</code>.</p>
@@ -297,6 +301,8 @@ To see if my test statistic was significant, I conducted a permutation test and 
 ></iframe>
 
 The p-value I calculated was 0.041, which is greater than the significance level of 0.01. Thus, we fail to reject the null hypothesis, which implies that the values of <code>minutes</code> does not have a correlation with the missingness of <code>avg_rating</code>.
+
+---
 
 So far, the missingness of <code>avg_rating</code> has not been proven to be MAR yet. However, let's test another variable: <code>n_tags</code>.
 
@@ -316,10 +322,30 @@ Again, to see if my test statistic was significant, I conducted a permutation te
   frameborder="0"
 ></iframe>
 
-The p-value I calculated 0, which is less than the significance level of 0.01. Thus, we are able to reject the null hypothesis, which strongly suggests that the values of <code>n_tags</code> does have a correlation with the missingness of <code>avg_rating</code>.
+The p-value I calculated was 0, which is less than the significance level of 0.01. Thus, we are able to reject the null hypothesis. This outcome strongly suggests that the values of <code>n_tags</code> does have a correlation with the missingness of <code>avg_rating</code>.
 
 ### <strong>Hypothesis Testing</strong>
+This hypothesis test will aim to answer to our original question proposed in the introduction: are tags representative of the content they are on?
 
+The tag that we will use is <code>'dietary'</code>. We previously saw in our "Interesting Aggregates" that there seemed to be a difference between the nutritional values between recipes with and without the tag. Logically, if one wants to go on a diet, they would generally want to eat less calories. Thus, this hypothesis test will see if the difference in calories in the two groups is significant or not.
+
+<p><b>Null Hypothesis: </b>Recipes with the <code>dietary</code> tag have the same amount of calories as recipes without the <code>dietary</code> tag.</p>
+<p><b>Alternate Hypothesis: </b>Recipes with the <code>dietary</code> tag have less calories as recipes without the <code>dietary</code> tag</p>
+<p><b>Test Statistic: </b>Absolute difference of mean ratings between recipes with and without the <code>dietary</code> tag</p>
+<p><b>Significance Level: </b>0.01</p>
+
+The observed test statistic between recipes with and without <code>'dietary'</code> was approximately 34.1.
+
+To see if my test statistic was significant, I conducted a permutation test and ran 1,000 simulations to generate an empirical distribution of the test statistic under the null hypothesis. The plot below visualizes the empirical distribution found:
+
+<iframe
+  src="plots/hypothesis-test-hist.html"
+  width="750"
+  height="550"
+  frameborder="0"
+></iframe>
+
+The p-value I calculated was 0, which is less than the significance level of 0.01. Thus, we are able to reject the null hypothesis. This outcome strongly suggests that the dietary tag is representative of dietary calorie levels.
 
 ### <strong>Framing a Prediction Problem</strong>
 ### <strong>Baseline Model</strong>
