@@ -1,5 +1,5 @@
 
-# <p style="text-align:center;">Investigating the Significance of Recipe Tags</p>
+# Investigating the Significance of Recipe Tags
 <p style="text-align:center;">a DSC 80 project — Nicolas Toon</p>
 
 ### <strong>Introduction</strong>
