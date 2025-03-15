@@ -358,13 +358,26 @@ Because this investigation has found distinct characteristics of the dietary tag
 
 This model will be performing binary classification: 0 if the model predicts that the recipe should not have the <code>'dietary'</code> tag and 1 if the model predicts that the recipe should have the <code>'dietary'</code> tag. To perform this classification, a random forest classifier will be used.
 
-To evaluate the performance of the model, f1 score will be utilized. Although accuracy is useful to just determine whether the predictions are correct, the original purpose of creating this model was to figure out whether tags were representative of their recipe, yet also get as many views as possible. As a result, we want to minimize both false positives and false negatives, so f1 score is the best metric to measure this.
+The dataset will be split into a training set (75%) and a testing set (25%). This is to ensure that our model isn't overfitting to the training data. We will introduce the testing set to the model when evaluating its performance. 
+
+To evaluate the performance of the model, F1 score will be utilized. Although accuracy is useful to just determine whether the predictions are correct, the original purpose of creating this model was to figure out whether tags were representative of their recipe, yet also get as many views as possible. As a result, we want to minimize both false positives and false negatives, so F1 score is the best metric to measure this. In addition, F1 score is robust to imbalanced classes, and the distribution of <code>'dietary'</code> is uneven.
 
 From the perspective of the person posting the recipe, the only information that we would know are the recipe details. This would include ingredients, nutrients, estimated time, steps, etc. The model will be using features from this pool.
 
 ### <strong>Baseline Model</strong>
-The features the baseline model will use are: 
+The features the baseline model will use are the nutritional variables: <code>'calories (#)'</code>, <code>'total fat (PDV)'</code>, <code>'sugar (PDV)'</code>, <code>'sodium (PDV)'</code>, <code>'protein (PDV)'</code>, <code>'saturated fat (PDV)'</code>, and <code>'carbohydrates (PDV)'</code>. We previously found that the nutritional values were different for recipes with and without the <code>'dietary'</code> tag.
 
+All of these features are continuous quantitative variables. As a result, to preprocess them before inputting into the model, a robust scaler was used. A robust scaler was the better choice over a standard scaler because all of the features had very extreme outliers, which could have potentially decreased our model's performance.
+
+The model used the default hyperparameters for a random forest classifier according to scikit-learn. After fitting the model to the training set, the model can be tested on the test set. The baseline model achieved an F1 score of 0.69 on the test set. The baseline score is pretty good for starting off, but it still shows room for improvement.
 
 ### <strong>Final Model</strong>
+A possibility that could increase the F1 score of the model is incorporating more features that help predict the response variable. Logically, when thinking about dietary recipes, one might consider eating healthier ingredients or not eating unhealthy ingredients. In the final model, I added five more features: <code>'salt'</code>, <code>'butter'</code>, <code>'sugar'</code>, <code>'olive oil'</code>, and <code>'vegetable oil'</code>. These were common ingredients in the dataset, and I considered these ingredients to play a significant part in healthy eating and decision making.
+
+Another possibility that could increase the F1 score of the model is tuning the hyperparameters of the model. Tuning the hyperparameters of the model is important for minimizing bias and increasing variance of the individual decision trees. This makes sure that when the decision trees are combined to make the random forest, the output has low bias and low variance. I also decided to tune specific hyperparameters: <code>'max_depth'</code> and <code>'min_samples_split'</code>. I picked these hyperparameters because they would control how similar each individual decision tree would be by limiting the variance. If the decision trees had no limit, eventually they would all reach the same decisions. By using GridSearchCV to iterate through various combinations of hyperparameters, the model was best fitted using a <code>'max_depth'</code> = 30 and a <code>'min_samples_split'</code> = 80.
+
+After fitting the final model to the same training set as the training model (so that variance in the results cannot be attributed to randomness), the model was evaluated to have an F1 score of 0.73 — an increase of about 6%.
+
+Although F1 score is hard to interpret, there wasn't a huge increase from the perfomance of baseline to final model (although further testing will need to be done to see if the change was significant). I believe that the added features didn't really add much value to the model because many recipes, regardless of whether they are healthy or not, may use those ingredients. In reality, what really matters is the amount of each ingredient used. For example, even though two recipes may use butter, one may use significantly less than the other, and thus be deemed more "dietary".
+
 ### <strong>Fairness Analysis</strong>
