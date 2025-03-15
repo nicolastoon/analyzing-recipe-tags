@@ -381,3 +381,28 @@ After fitting the final model to the same training set as the training model (so
 Although F1 score is hard to interpret, there wasn't a huge increase from the perfomance of baseline to final model (although further testing will need to be done to see if the change was significant). I believe that the added features didn't really add much value to the model because many recipes, regardless of whether they are healthy or not, may use those ingredients. In reality, what really matters is the amount of each ingredient used. For example, even though two recipes may use butter, one may use significantly less than the other, and thus be deemed more "dietary".
 
 ### <strong>Fairness Analysis</strong>
+A more pragmatic metric for the model is measuring its fairness. Ideally, a model should be without bias across all groups. For this fairness analysis, the model should be equally fair to high calorie and low calorie recipes.
+
+The median was used to divide the recipes into the high and low calorie groups. The median was used since <code>'calories'</code> had extreme outliers. Therefore, any recipe with strictly less calories than the median were considered "low calorie" and any recipe with calories greater than or equal to the median were considered "high calorie".
+
+For our measure of fairness, I decided to evaluate the accuracy parity. If the model is fair, then the accuracy across both groups will have an insignificant difference, and vice versa. I chose accuracy parity because <code>'calories'</code> is likely to be a significant feature in our model, so evaluating other forms of parities (such as precision or recall parities) might be imbalanced due to the nature of our model. For example, low calorie recipes will likely get more predictions for the <code>dietary</code> tag, so recipes without the <code>dietary</code> tag will hurt the precision. On the other hand, high calorie recipes are less likely to get predictions for the <code>dietary</code> tag, so recipes with the tag will hurt the recall.
+
+We can measure the significance of the accuracy parity of the model using a permutation test.
+
+<p><b>Null Hypothesis: </b>The accuracy of my model for high calorie recipes is the same compared to low calorie recipes.</p>
+<p><b>Alternate Hypothesis: </b>The accuracy of my model for high calorie recipes is not the same compared to low calorie recipes.</p>
+<p><b>Test Statistic: </b>Absolute difference in means</p>
+<p><b>Significance Level: </b>0.01</p>
+
+The observed accuracy parity between the high calorie and low calorie recipes is about 0.153. This means that there was a 1.53% difference between the accuracies of the two groups.
+
+After running 1,000 simulations to generate an empirical distribution of the test statistic under the null hypothesis, I plotted the following histogram:
+
+<iframe
+  src="plots/fairness-hist.html"
+  width="750"
+  height="550"
+  frameborder="0"
+></iframe>
+
+The p-value calculated from this permutation test was 0.024, which is greater than the significance level of 0.01. Thus, we fail the reject the null hypothesis. This outcome implies that our model is likely to be fair between recipes with higher and lower calories.
