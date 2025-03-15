@@ -1,5 +1,5 @@
 
-# Investigating the Significance of Recipe Tags
+# <p style="text-align:center;">Investigating the Significance of Recipe Tags</p>
 <p style="text-align:center;">a DSC 80 project — Nicolas Toon</p>
 
 ### <strong>Introduction</strong>
@@ -121,59 +121,60 @@ To make the data exploration process easier, the following steps were executed, 
       <li>This matches each review with its corresponding recipe, making it easier to associate ratings with recipes.</li>
     </ul>
       <p></p>
+
   <li>Replacing all zeroes with <code>np.nan</code></li>
     <ul>
       <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
     </ul>
-
+      <p></p>
 
   <li>Finding the average rating of each recipe</li>
     <ul>
       <li>Taking the mean of all ratings associated with each recipe allows us to generalize ratings from recipe to recipe.</li>
     </ul>
-
+      <p></p>
 
   <li>Keeping only unique recipes</li> 
     <ul>
       <li>Since merging resulting in duplicate recipes, and we only need to analyze recipes and not individual reviews, we can filter for unique recipes, so that recipes with more reviews don't count more than recipes with less reviews.</li>
     </ul>
-
+      <p></p>
 
   <li>Converting <code>'submitted'</code> to a datetime object</li>
     <ul>
       <li>Originally, <code>'submitted'</code> was a string, but by converting to a datetime object, we can manipulate the date easily.</li>
     </ul>
-
+      <p></p>
 
   <li>Converting <code>'nutrition'</code> to a list</li>
     <ul>
       <li>Originally, <code>'nutrition'</code> was a string, but by converting to a list, we can manipulate information from the nutritional values easily.</li>
     </ul>
-
+      <p></p>
 
   <li>Converting <code>'ingredients'</code> to a list</li>
     <ul>
       <li>Originally, <code>'ingredients'</code> was a string, but by converting to a list, we can manipulate information from the ingredients easily.</li>
     </ul>
-
+      <p></p>
 
   <li>Converting <code>'tags'</code> to a list</li>
     <ul>
       <li>Originally, <code>'tags'</code> was a string, but by converting to a list, we can manipulate information from the tags easily.</li>
     </ul>
-
+      <p></p>
 
   <li>Creating a column of <code>'n_tags'</code></li>
     <ul>
       <li><code>'n_tags'</code> is a column of integers that corresponds to the number of tags each recipe has, which will be useful in comparing recipes with more vs. less tags.</li>
     </ul>
-    
+      <p></p>
 
   <li>Creating a column of <code>'year'</code></li>
     <ul>
       <li><code>'year'</code> is a column of integers that corresponds to the year that each recipe was posted, which will be useful for any time series analysis.</li>
     </ul>
-
+      <p></p>
 
   <li>Dropping any unnecessary/repetitive columns</li>
     <ul>
@@ -299,7 +300,7 @@ To see if my test statistic was significant, I conducted a permutation test and 
   frameborder="0"
 ></iframe>
 
-The p-value I calculated was 0.041, which is greater than the significance level of 0.01. Thus, we fail to reject the null hypothesis, which implies that the values of <code>minutes</code> does not have a correlation with the missingness of <code>avg_rating</code>.
+The p-value I calculated was 0.029, which is greater than the significance level of 0.01. Thus, we fail to reject the null hypothesis, which implies that the values of <code>minutes</code> does not have a correlation with the missingness of <code>avg_rating</code>.
 
 So far, the missingness of <code>avg_rating</code> has not been proven to be MAR yet. However, let's test another variable: <code>n_tags</code>.
 
@@ -393,7 +394,7 @@ We can measure the significance of the accuracy parity of the model using a perm
 <p><b>Test Statistic: </b>Absolute difference in means</p>
 <p><b>Significance Level: </b>0.01</p>
 
-The observed accuracy parity between the high calorie and low calorie recipes is about 0.153. This means that there was a 1.53% difference between the accuracies of the two groups.
+The observed accuracy parity between the high calorie and low calorie recipes is about 0.197. This means that there was a 1.97% difference between the accuracies of the two groups.
 
 After running 1,000 simulations to generate an empirical distribution of the test statistic under the null hypothesis, I plotted the following histogram:
 
@@ -404,4 +405,4 @@ After running 1,000 simulations to generate an empirical distribution of the tes
   frameborder="0"
 ></iframe>
 
-The p-value calculated from this permutation test was 0.024, which is greater than the significance level of 0.01. Thus, we fail the reject the null hypothesis. This outcome implies that our model is likely to be fair between recipes with higher and lower calories.
+The p-value calculated from this permutation test was 0.006, which is less than the significance level of 0.01. Thus, we reject the null hypothesis. This outcome implies that our model is unlikely to be equally accurate between recipes with higher and lower calories. Therefore, our model is probably unfair.
