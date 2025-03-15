@@ -120,8 +120,7 @@ To make the data exploration process easier, the following steps were executed, 
     <ul>
       <li>This matches each review with its corresponding recipe, making it easier to associate ratings with recipes.</li>
     </ul>
-
-
+      <p></p>
   <li>Replacing all zeroes with <code>np.nan</code></li>
     <ul>
       <li>Any entry of 0 does not make sense for each of the features, so 0 can be assumed as "missing values". Thus, we can replace all zeroes so that they are not included in data analysis.</li>
@@ -222,7 +221,7 @@ To initially explore the data, I examined the distribution of ratings for recipe
 
 <iframe
   src="plots/avg-ratings-hist.html"
-  width="750"
+  width="800"
   height="550"
   frameborder="0"
 ></iframe>
@@ -235,7 +234,7 @@ I also examined the distribution of the number of tags for each recipe.
 
 <iframe
   src="plots/n-tags-hist.html"
-  width="750"
+  width="800"
   height="550"
   frameborder="0"
 ></iframe>
@@ -247,7 +246,7 @@ For further exploration, I was curious about if there were any tags that became 
 
 <iframe
   src="plots/tag-props-line.html"
-  width="750"
+  width="800"
   height="550"
   frameborder="0"
 ></iframe>
@@ -256,12 +255,12 @@ We can see that most tags don't have much usage, only making up less than 4% of 
 
 <iframe
   src="plots/top-5-line.html"
-  width="750"
+  width="800"
   height="550"
   frameborder="0"
 ></iframe>
 
-The three tags mentioned earlier, <code>'preparation'</code>, <code>'time-to-make'</code>, and <code>'course'</code>, also have a lot of variance. The tag <code>'60-minutes-or-less'</code> had a big jump in usage in 2015! On the other hand,the tag <code>'easy'</code> actually had a great decrease in 2018, meaning the usage for the tag significantly dropped in recipes posted in 2018!
+The three tags mentioned earlier, <code>'preparation'</code>, <code>'time-to-make'</code>, and <code>'course'</code>, also have a lot of variance. The tag <code>'60-minutes-or-less'</code> had a big jump in usage in 2015! On the other hand, the tag <code>'easy'</code> actually had a great decrease in 2018, meaning the usage for the tag significantly dropped in recipes posted in 2018!
 
 #### <b>Interesting Aggregates</b>
 I was curious whether recipes with a certain tag had attributes that recipes without that tag didn't have. For this investigation, I utilized the <code>'dietary'</code> tag, and grouped recipes with and without the tag. Then, I took the mean of the nutritional values for each group. The aggregation is shown in the DataFrame below:
@@ -271,16 +270,16 @@ I was curious whether recipes with a certain tag had attributes that recipes wit
 | False     |          326.7 |                23 |            23 |             16 |              20 |                    26 |                     9 |
 | True      |          292.6 |                18 |            23 |             13 |              17 |                    18 |                     9 |
 
-The DataFrame shows that nutritional values in recipes with the <code>'dietary'</code> tag were consistently less than or equal to nutritional values in recipes without the <code>'dietary'</code> tag. This suggests that there is a difference between the two groups, but is this difference significant or not?
+The DataFrame shows that nutritional values in recipes with the <code>'dietary'</code> tag were consistently less than or equal to nutritional values in recipes without the <code>'dietary'</code> tag. This suggests that there is a difference between the two groups, but is this difference significant or not? We will investigate this in a bit.
 
 ### <strong>Assessment of Missingness</strong>
-By taking a look at the columns in the cleaned dataset, there are two columns with a significant number of missing values: <code>'description'</code> and <code>'avg_rating'</code>
+By taking a look at the columns in the cleaned dataset, there are two columns with a significant number of missing values: <code>'description'</code> and <code>'avg_rating'</code>.
 
 #### <b>NMAR Analysis</b>
 I believe that the missingness of <code>'description'</code> is NMAR (not missing at random) because the values of <code>'description'</code> depends on whether the contributor submitted a description or not. There could be a variety of reasons that causes a contributor to not submit a description (forgetfulness, complicated details, self-explanatory recipe, etc.). One variable that we could collect to explain the missingness of the data is whether the contributor is part of a company or is known to be a cooking influencer, since contributors who are well established/dedicated to recipe-making often add descriptions. If the dataset included this variable, then it might be probable that <code>description</code> is MAR (missing at random).
 
 #### <b>Missingness Dependency</b>
-I suspect that the missingness of <code>'avg_rating'</code> is MAR (missing at random). In other words, the missingness of <code>'avg_rating'</code> is related to the values of another column. The first column I will investigate is <code>minutes</code>.
+I suspect that the missingness of <code>'avg_rating'</code> is MAR (missing at random). In other words, the missingness of <code>'avg_rating'</code> is related to the values of another column. The first column I will investigate is <code>'minutes'</code>.
 
 ---
 
@@ -295,7 +294,7 @@ To see if my test statistic was significant, I conducted a permutation test and 
 
 <iframe
   src="plots/missingness-minutes-hist.html"
-  width="750"
+  width="800"
   height="550"
   frameborder="0"
 ></iframe>
@@ -317,7 +316,7 @@ Again, to see if my test statistic was significant, I conducted a permutation te
 
 <iframe
   src="plots/missingness-tags-hist.html"
-  width="750"
+  width="800"
   height="550"
   frameborder="0"
 ></iframe>
@@ -344,7 +343,7 @@ To see if my test statistic was significant, I ran 1,000 simulations to generate
 
 <iframe
   src="plots/hypothesis-test-hist.html"
-  width="750"
+  width="800"
   height="550"
   frameborder="0"
 ></iframe>
@@ -374,7 +373,7 @@ The model used the default hyperparameters for a random forest classifier accord
 ### <strong>Final Model</strong>
 A possibility that could increase the F1 score of the model is incorporating more features that help predict the response variable. Logically, when thinking about dietary recipes, one might consider eating healthier ingredients or not eating unhealthy ingredients. In the final model, I added five more features: <code>'salt'</code>, <code>'butter'</code>, <code>'sugar'</code>, <code>'olive oil'</code>, and <code>'vegetable oil'</code>. These were common ingredients in the dataset, and I considered these ingredients to play a significant part in healthy eating and decision making.
 
-Another possibility that could increase the F1 score of the model is tuning the hyperparameters of the model. Tuning the hyperparameters of the model is important for minimizing bias and increasing variance of the individual decision trees. This makes sure that when the decision trees are combined to make the random forest, the output has low bias and low variance. I also decided to tune specific hyperparameters: <code>'max_depth'</code> and <code>'min_samples_split'</code>. I picked these hyperparameters because they would control how similar each individual decision tree would be by limiting the variance. If the decision trees had no limit, eventually they would all reach the same decisions. By using GridSearchCV to iterate through various combinations of hyperparameters, the model was best fitted using a <code>'max_depth'</code> = 30 and a <code>'min_samples_split'</code> = 80.
+Another possibility that could increase the F1 score of the model is tuning the hyperparameters of the model. Tuning the hyperparameters of the model is important for minimizing bias and increasing variance of the individual decision trees. This makes sure that when the decision trees are combined to make the random forest, the output has low bias and low variance. I also decided to tune specific hyperparameters: <code>'max_depth'</code> and <code>'min_samples_split'</code>. I picked these hyperparameters because they would control how similar each individual decision tree would be by limiting the variance. If the decision trees had no limit, eventually they would all reach the same decisions. By using GridSearchCV to iterate through various combinations of hyperparameters, the model was best fitted using <code>'max_depth'</code> = 30 and <code>'min_samples_split'</code> = 80.
 
 After fitting the final model to the same training set as the training model (so that variance in the results cannot be attributed to randomness), the model was evaluated to have an F1 score of 0.73 — an increase of about 6%.
 
@@ -385,7 +384,7 @@ A more pragmatic metric for the model is measuring its fairness. Ideally, a mode
 
 The median was used to divide the recipes into the high and low calorie groups. The median was used since <code>'calories'</code> had extreme outliers. Therefore, any recipe with strictly less calories than the median were considered "low calorie" and any recipe with calories greater than or equal to the median were considered "high calorie".
 
-For our measure of fairness, I decided to evaluate the accuracy parity. If the model is fair, then the accuracy across both groups will have an insignificant difference, and vice versa. I chose accuracy parity because <code>'calories'</code> is likely to be a significant feature in our model, so evaluating other forms of parities (such as precision or recall parities) might be imbalanced due to the nature of our model. For example, low calorie recipes will likely get more predictions for the <code>dietary</code> tag, so recipes without the <code>dietary</code> tag will hurt the precision. On the other hand, high calorie recipes are less likely to get predictions for the <code>dietary</code> tag, so recipes with the tag will hurt the recall.
+For our measure of fairness, I decided to evaluate the accuracy parity. If the model is fair, then the accuracy across both groups will have an insignificant difference, and vice versa. I chose accuracy parity because <code>'calories'</code> is likely to be a significant feature in our model, so evaluating other forms of parities (such as precision or recall parities) might be imbalanced due to the nature of our model. For example, low calorie recipes will likely get more predictions for the <code>'dietary'</code> tag, so recipes without the <code>'dietary'</code> tag will hurt the precision. On the other hand, high calorie recipes are less likely to get predictions for the <code>'dietary'</code> tag, so recipes with the tag will hurt the recall.
 
 We can measure the significance of the accuracy parity of the model using a permutation test.
 
@@ -400,7 +399,7 @@ After running 1,000 simulations to generate an empirical distribution of the tes
 
 <iframe
   src="plots/fairness-hist.html"
-  width="750"
+  width="800"
   height="550"
   frameborder="0"
 ></iframe>
