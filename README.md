@@ -344,7 +344,7 @@ To see if my test statistic was significant, I ran 1,000 simulations to generate
 
 <iframe
   src="plots/hypothesis-test-hist.html"
-  width="800"
+  width="1000"
   height="550"
   frameborder="0"
 ></iframe>
