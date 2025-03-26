@@ -353,13 +353,13 @@ Again, to see if my test statistic was significant, I conducted a permutation te
 The p-value I calculated was 0, which is less than the significance level of 0.01. Thus, we are able to reject the null hypothesis. This outcome strongly suggests that the values of <code>n_tags</code> does have a correlation with the missingness of <code>avg_rating</code>.
 
 ### <strong>Hypothesis Testing</strong>
-This hypothesis test will aim to answer to our original question proposed in the introduction: are tags representative of the content they are on?
+This hypothesis test will aim to answer to the original question proposed in the introduction: are tags representative of the content they are on?
 
-The tag that we will use is <code>'dietary'</code>. We previously saw in our "Interesting Aggregates" that there seemed to be a difference between the nutritional values between recipes with and without the tag. Logically, if one wants to go on a diet, they would generally want to eat less calories. Thus, this hypothesis test will see if the difference in calories in the two groups is significant or not.
+The tag that we will use is <code>'dietary'</code>. We previously saw in "Interesting Aggregates" that there seemed to be a difference between the nutritional values between recipes with and without the tag. Logically, if one wants to go on a diet, they would generally want to eat less calories. Thus, this hypothesis test will see if the difference in calories in the two groups is significant or not.
 
-For our hypothesis test, we will be running a permutation test since we want to compare whether recipes with and without the <code>dietary</code> tag have similar distributions and populations.
+For the hypothesis test, we will be running a permutation test since we want to compare whether recipes with and without the <code>dietary</code> tag have similar distributions and populations.
 
-For our test statistic, I will use the absolute difference in mean calories. The absolute difference in means is useful because we have two groups, each with a quantitative mean that looks to be different from the other group. By comparing the simulated and observed test statistics, we can see if our observation is significant or not.
+For the test statistic, I will use the absolute difference in mean calories. The absolute difference in means is useful because we have two groups, each with a quantitative mean that looks to be different from the other group. By comparing the simulated and observed test statistics, we can see if the observation is significant or not.
 
 <hr>
 <p></p>
@@ -388,11 +388,11 @@ The p-value I calculated was 0, which is less than the significance level of 0.0
 ### <strong>Framing a Prediction Problem</strong>
 From the perspective of the person posting the recipe, it would be very useful to know if certain tags are representative of their recipe, as to not mislead their audience, but at the same time, it would be bad if the missing tag costed the person million of views, potentially. 
 
-Because this investigation has found distinct characteristics of the dietary tag,  this suggests that there will be features in our dataset that can predict whether or not a given recipe should have the dietary tag. Thus, the model will be predicting whether or not a recipe should have the dietary tag.
+Because this investigation has found distinct characteristics of the <code>'dietary'</code> tag, this suggests that there will be features in the dataset that can predict whether or not a given recipe should have the dietary tag. Thus, the model will be predicting whether or not a recipe should have the dietary tag.
 
 This model will be performing binary classification: 0 if the model predicts that the recipe should not have the <code>'dietary'</code> tag and 1 if the model predicts that the recipe should have the <code>'dietary'</code> tag. To perform this classification, a random forest classifier will be used.
 
-The dataset will be split into a training set (75%) and a testing set (25%). This is to ensure that our model isn't overfitting to the training data. We will introduce the testing set to the model when evaluating its performance. 
+The dataset will be split into a training set (75%) and a testing set (25%). This is to ensure that the model isn't overfitting to the training data. We will introduce the testing set to the model when evaluating its performance. 
 
 To evaluate the performance of the model, F1 score will be utilized. Although accuracy is useful to just determine whether the predictions are correct, the original purpose of creating this model was to figure out whether tags were representative of their recipe, yet also get as many views as possible. As a result, we want to minimize both false positives and false negatives, so F1 score is the best metric to measure this. In addition, F1 score is robust to imbalanced classes, and the distribution of <code>'dietary'</code> is uneven.
 
@@ -401,7 +401,7 @@ From the perspective of the person posting the recipe, the only information that
 ### <strong>Baseline Model</strong>
 The features the baseline model will use are the nutritional variables: <code>'calories (#)'</code>, <code>'total fat (PDV)'</code>, <code>'sugar (PDV)'</code>, <code>'sodium (PDV)'</code>, <code>'protein (PDV)'</code>, <code>'saturated fat (PDV)'</code>, and <code>'carbohydrates (PDV)'</code>. We previously found that the nutritional values were different for recipes with and without the <code>'dietary'</code> tag.
 
-All of these features are continuous quantitative variables. As a result, to preprocess them before inputting into the model, a robust scaler was used. A robust scaler was the better choice over a standard scaler because all of the features had very extreme outliers, which could have potentially decreased our model's performance.
+All of these features are continuous quantitative variables. As a result, to preprocess them before inputting into the model, a robust scaler was used. A robust scaler was the better choice over a standard scaler because all of the features had very extreme outliers, which could have potentially decreased the model's performance.
 
 The model used the default hyperparameters for a random forest classifier according to scikit-learn. After fitting the model to the training set, the model can be tested on the test set. The baseline model achieved an F1 score of 0.69 on the test set. The baseline score is pretty good for starting off, but it still shows room for improvement.
 
@@ -419,7 +419,7 @@ A more pragmatic metric for the model is measuring its fairness. Ideally, a mode
 
 The median was used to divide the recipes into the high and low calorie groups. The median was used since <code>'calories'</code> had extreme outliers. Therefore, any recipe with strictly less calories than the median were considered "low calorie" and any recipe with calories greater than or equal to the median were considered "high calorie".
 
-For our measure of fairness, I decided to evaluate the accuracy parity. If the model is fair, then the accuracy across both groups will have an insignificant difference, and vice versa. I chose accuracy parity because <code>'calories'</code> is likely to be a significant feature in our model, so evaluating other forms of parities (such as precision or recall parities) might be imbalanced due to the nature of our model. For example, low calorie recipes will likely get more predictions for the <code>'dietary'</code> tag, so recipes without the <code>'dietary'</code> tag will hurt the precision. On the other hand, high calorie recipes are less likely to get predictions for the <code>'dietary'</code> tag, so recipes with the tag will hurt the recall.
+For a measure of fairness, I decided to evaluate the accuracy parity. If the model is fair, then the accuracy across both groups will have an insignificant difference, and vice versa. I chose accuracy parity because <code>'calories'</code> is likely to be a significant feature in the model, so evaluating other forms of parities (such as precision or recall parities) might be imbalanced due to the nature of the model. For example, low calorie recipes will likely get more predictions for the <code>'dietary'</code> tag, so recipes without the <code>'dietary'</code> tag will hurt the precision. On the other hand, high calorie recipes are less likely to get predictions for the <code>'dietary'</code> tag, so recipes with the tag will hurt the recall.
 
 We can measure the significance of the accuracy parity of the model using a permutation test.
 
@@ -445,4 +445,4 @@ After running 1,000 simulations to generate an empirical distribution of the tes
   frameborder="0"
 ></iframe>
 
-The p-value calculated from this permutation test was 0.006, which is less than the significance level of 0.01. Thus, we reject the null hypothesis. This outcome implies that our model is unlikely to be equally accurate between recipes with higher and lower calories. Therefore, our model is probably unfair.
+The p-value calculated from this permutation test was 0.006, which is less than the significance level of 0.01. Thus, we reject the null hypothesis. This outcome implies that the model is unlikely to be equally accurate between recipes with higher and lower calories. Therefore, we can infer that the model is unfair.
