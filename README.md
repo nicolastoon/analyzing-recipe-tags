@@ -1,3 +1,5 @@
+<head><link rel="stylesheet" href="style.css"></head>
+
 # Investigating the Significance of Recipe Tags
 <p style="text-align:center;">a DSC 80 project, conducted by Nicolas Toon</p>
 
@@ -244,9 +246,6 @@ To initially explore the data, I examined the distribution of ratings for recipe
 
 As the histogram shows, ratings are significantly skewed left. This implies that there are more recipes on that are rated a 4 through 5, compared to 0 through 4, creating a massive class imbalance.
 
-<hr>
-
-
 I also examined the distribution of the number of tags for each recipe.
 
 <iframe
@@ -324,12 +323,14 @@ The p-value I calculated was 0.029, which is greater than the significance level
 
 So far, the missingness of <code>avg_rating</code> has not been proven to be MAR yet. However, let's test another variable: <code>n_tags</code>.
 
----
+<div>
 
 <p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the number of tags.</p>
 <p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the number of tags.</p>
 <p><b>Test Statistic: </b>The absolute difference in the number of tags between rows missing and not missing <code>'avg_rating'</code>.</p>
 <p><b>Significance Level: </b>0.01</p>
+
+</div>
 
 The observed test statistic between recipes with and without a rating was approximately 0.94.
 
