@@ -1,11 +1,3 @@
-<head>
-  <style>
-    .table-wrapper {
-      overflow-x: scroll;
-    }
-  </style>
-</head>
-
 # Investigating the Significance of Recipe Tags
 <p style="text-align:center;">a DSC 80 project, conducted by Nicolas Toon</p>
 
