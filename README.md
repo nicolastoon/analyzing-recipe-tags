@@ -203,20 +203,18 @@ The first five rows of the cleaned DataFrame are shown below:
 
 </div>
 
+
 Because the columns <code>'nutrition'</code>, <code>'ingredients'</code>, and <code>'tags'</code> are lists within the DataFrame, we extracted the lists into separate DataFrames, with row order preserved (so the first row of the new DataFrames will correspond to the same recipe as the first row of the cleaned DataFrame). In <code>ingredients_df</code> and <code>tags_df</code>, 1 represents that the recipe contains the ingredient/tag and 0 represents that the recipe does not contain the ingredient/tag.
 
 The first two rows of each new DataFrame are shown below:
 
 <code>nutrition_df</code>:
 
-<div class="table-wrapper" markdown="block">
-
 |   calories (#) |   total fat (PDV) |   sugar (PDV) |   sodium (PDV) |   protein (PDV) |   saturated fat (PDV) |   carbohydrates (PDV) |
 |---------------:|------------------:|--------------:|---------------:|----------------:|----------------------:|----------------------:|
 |          138.4 |                10 |            50 |              3 |               3 |                    19 |                     6 |
 |          595.1 |                46 |           211 |             22 |              13 |                    51 |                    26 |
 
-</div>
 
 <code>ingredients_df</code>:
 
@@ -229,6 +227,7 @@ The first two rows of each new DataFrame are shown below:
 
 </div>
 
+
 <code>tags_df</code>:
 
 <div class="table-wrapper" markdown="block">
@@ -240,12 +239,13 @@ The first two rows of each new DataFrame are shown below:
 
 </div>
 
+
 #### <b>Univariate Analysis</b>
 To initially explore the data, I examined the distribution of ratings for recipes.
 
 <iframe
   src="plots/avg-ratings-hist.html"
-  width="800"
+  width="750"
   height="550"
   frameborder="0"
 ></iframe>
@@ -254,11 +254,12 @@ As the histogram shows, ratings are significantly skewed left. This implies that
 
 <hr>
 
+
 I also examined the distribution of the number of tags for each recipe.
 
 <iframe
   src="plots/n-tags-hist.html"
-  width="800"
+  width="750"
   height="550"
   frameborder="0"
 ></iframe>
@@ -270,7 +271,7 @@ For further exploration, I was curious about if there were any tags that became 
 
 <iframe
   src="plots/tag-props-line.html"
-  width="800"
+  width="750"
   height="550"
   frameborder="0"
 ></iframe>
@@ -279,7 +280,7 @@ We can see that most tags don't have much usage, only making up less than 4% of 
 
 <iframe
   src="plots/top-5-line.html"
-  width="800"
+  width="750"
   height="550"
   frameborder="0"
 ></iframe>
@@ -322,7 +323,7 @@ To see if my test statistic was significant, I conducted a permutation test and 
 
 <iframe
   src="plots/missingness-minutes-hist.html"
-  width="800"
+  width="750"
   height="550"
   frameborder="0"
 ></iframe>
@@ -344,7 +345,7 @@ Again, to see if my test statistic was significant, I conducted a permutation te
 
 <iframe
   src="plots/missingness-tags-hist.html"
-  width="800"
+  width="750"
   height="550"
   frameborder="0"
 ></iframe>
@@ -371,7 +372,7 @@ To see if my test statistic was significant, I ran 1,000 simulations to generate
 
 <iframe
   src="plots/hypothesis-test-hist.html"
-  width="1000"
+  width="750"
   height="550"
   frameborder="0"
 ></iframe>
@@ -427,7 +428,7 @@ After running 1,000 simulations to generate an empirical distribution of the tes
 
 <iframe
   src="plots/fairness-hist.html"
-  width="800"
+  width="750"
   height="550"
   frameborder="0"
 ></iframe>
