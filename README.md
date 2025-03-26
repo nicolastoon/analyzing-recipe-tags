@@ -309,6 +309,8 @@ I suspect that the missingness of <code>'avg_rating'</code> is MAR (missing at r
 <p><b>Significance Level: </b>0.01</p>
 </div>
 
+<p></p>
+
 The observed test statistic between recipes with and without a rating was approximately 117.34.
 
 To see if my test statistic was significant, I conducted a permutation test and ran 1,000 simulations to generate an empirical distribution of the test statistic under the null hypothesis. The plot below visualizes the empirical distribution found:
@@ -330,6 +332,8 @@ So far, the missingness of <code>avg_rating</code> has not been proven to be MAR
 <p><b>Test Statistic: </b>The absolute difference in the number of tags between rows missing and not missing <code>'avg_rating'</code>.</p>
 <p><b>Significance Level: </b>0.01</p>
 </div>
+
+<p></p>
 
 The observed test statistic between recipes with and without a rating was approximately 0.94.
 
@@ -359,6 +363,8 @@ For our test statistic, I will use the absolute difference in mean calories. The
 <p><b>Test Statistic: </b>Absolute difference of mean calories between recipes with and without the <code>dietary</code> tag</p>
 <p><b>Significance Level: </b>0.01</p>
 </div>
+
+<p></p>
 
 The observed test statistic between recipes with and without <code>'dietary'</code> was approximately 34.1.
 
@@ -417,6 +423,8 @@ We can measure the significance of the accuracy parity of the model using a perm
 <p><b>Test Statistic: </b>Absolute difference in means</p>
 <p><b>Significance Level: </b>0.01</p>
 </div>
+
+<p></p>
 
 The observed accuracy parity between the high calorie and low calorie recipes is about 0.0197. This means that there was a 1.97% difference between the accuracies of the two groups.
 
