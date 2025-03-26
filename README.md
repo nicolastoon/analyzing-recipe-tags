@@ -201,7 +201,7 @@ The first five rows of the cleaned DataFrame are shown below:
 | 2000 meatloaf                        | 475785 |        90 |        17 |              13 |            5 |           2 |       10 |   2012 |
 
 </div>
-
+<p></p>
 
 Because the columns <code>'nutrition'</code>, <code>'ingredients'</code>, and <code>'tags'</code> are lists within the DataFrame, we extracted the lists into separate DataFrames, with row order preserved (so the first row of the new DataFrames will correspond to the same recipe as the first row of the cleaned DataFrame). In <code>ingredients_df</code> and <code>tags_df</code>, 1 represents that the recipe contains the ingredient/tag and 0 represents that the recipe does not contain the ingredient/tag.
 
@@ -225,7 +225,7 @@ The first two rows of each new DataFrame are shown below:
 |      1 |        0 |       1 |       0 |           0 |       1 |               0 |      1 |      0 |        0 |       1 |                   1 |             1 |               0 |     1 |                 0 |                 0 |              0 |             0 |               0 |             1 |              0 |          0 |               0 |          0 |
 
 </div>
-
+<p></p>
 
 <code>tags_df</code>:
 
@@ -237,7 +237,7 @@ The first two rows of each new DataFrame are shown below:
 |             1 |              1 |        0 |                 0 |         0 |      0 |          0 |         1 |                  0 |                    1 |           0 |                 0 |                    0 |      0 |                    1 |            0 |                    0 |                 0 |            0 |          0 |            0 |                1 |         0 |          0 |                 0 |             0 |                       0 |           0 |            0 |               0 |             0 |                   0 |             0 |              0 |            0 |          1 |                       0 |            0 |             0 |          0 |               0 |           0 |         0 |       0 |              0 |         0 |         0 |       0 |              0 |            0 |                  1 |              0 |          0 |        0 |               0 |      0 |           0 |        0 |        0 |         0 |                   0 |       0 |           0 |        0 |             0 |       0 |
 
 </div>
-
+<p></p>
 
 #### <b>Univariate Analysis</b>
 To initially explore the data, I examined the distribution of ratings for recipes.
@@ -294,6 +294,7 @@ I was curious whether recipes with a certain tag had attributes that recipes wit
 | True      |          292.6 |                18 |            23 |             13 |              17 |                    18 |                     9 |
 
 </div>
+<p></p>
 
 The DataFrame shows that nutritional values in recipes with the <code>'dietary'</code> tag were consistently less than or equal to nutritional values in recipes without the <code>'dietary'</code> tag. This suggests that there is a difference between the two groups, but is this difference significant or not? We will investigate this in a bit.
 
@@ -306,16 +307,14 @@ I believe that the missingness of <code>'description'</code> is NMAR (not missin
 #### <b>Missingness Dependency</b>
 I suspect that the missingness of <code>'avg_rating'</code> is MAR (missing at random). In other words, the missingness of <code>'avg_rating'</code> is related to the values of another column. The first column I will investigate is <code>'minutes'</code>.
 
-<hr>
-<p></p>
+<div class='hypothesis'>
 
 <p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the recipe time.</p>
 <p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the recipe time.</p>
 <p><b>Test Statistic: </b>The absolute difference in recipe time between rows missing and not missing <code>'avg_rating'</code>.</p>
 <p><b>Significance Level: </b>0.01</p>
 
-<hr>
-<p></p>
+</div>
 
 The observed test statistic between recipes with and without a rating was approximately 117.34.
 
@@ -332,16 +331,14 @@ The p-value I calculated was 0.029, which is greater than the significance level
 
 So far, the missingness of <code>avg_rating</code> has not been proven to be MAR yet. However, let's test another variable: <code>n_tags</code>.
 
-<hr>
-<p></p>
+<div class='hypothesis'>
 
 <p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the number of tags.</p>
 <p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the number of tags.</p>
 <p><b>Test Statistic: </b>The absolute difference in the number of tags between rows missing and not missing <code>'avg_rating'</code>.</p>
 <p><b>Significance Level: </b>0.01</p>
 
-<hr>
-<p></p>
+</div>
 
 The observed test statistic between recipes with and without a rating was approximately 0.94.
 
@@ -365,16 +362,14 @@ For our hypothesis test, we will be running a permutation test since we want to 
 
 For our test statistic, I will use the absolute difference in mean calories. The absolute difference in means is useful because we have two groups, each with a quantitative mean that looks to be different from the other group. By comparing the simulated and observed test statistics, we can see if our observation is significant or not.
 
-<hr>
-<p></p>
+<div class='hypothesis'>
 
 <p><b>Null Hypothesis: </b>Recipes with the <code>dietary</code> tag have the same amount of calories as recipes without the <code>dietary</code> tag.</p>
 <p><b>Alternate Hypothesis: </b>Recipes with the <code>dietary</code> tag have less calories as recipes without the <code>dietary</code> tag</p>
 <p><b>Test Statistic: </b>Absolute difference of mean calories between recipes with and without the <code>dietary</code> tag</p>
 <p><b>Significance Level: </b>0.01</p>
 
-<hr>
-<p></p>
+</div>
 
 The observed test statistic between recipes with and without <code>'dietary'</code> was approximately 34.1.
 
@@ -427,16 +422,14 @@ For our measure of fairness, I decided to evaluate the accuracy parity. If the m
 
 We can measure the significance of the accuracy parity of the model using a permutation test.
 
-<hr>
-<p></p>
+<div class='hypothesis'>
 
 <p><b>Null Hypothesis: </b>The accuracy of my model for high calorie recipes is the same compared to low calorie recipes.</p>
 <p><b>Alternate Hypothesis: </b>The accuracy of my model for high calorie recipes is not the same compared to low calorie recipes.</p>
 <p><b>Test Statistic: </b>Absolute difference in means</p>
 <p><b>Significance Level: </b>0.01</p>
 
-<hr>
-<p></p>
+</div>
 
 The observed accuracy parity between the high calorie and low calorie recipes is about 0.197. This means that there was a 1.97% difference between the accuracies of the two groups.
 

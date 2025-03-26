@@ -1,3 +1,9 @@
 .table-wrapper {
   overflow-x: scroll;
 }
+
+.hypothesis {
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+    padding: 25px
+  }
