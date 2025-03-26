@@ -244,7 +244,7 @@ To initially explore the data, I examined the distribution of ratings for recipe
 
 <iframe
   src="plots/avg-ratings-hist.html"
-  width="750"
+  width="100%"
   height="550"
   frameborder="0"
 ></iframe>
@@ -255,7 +255,7 @@ I also examined the distribution of the number of tags for each recipe.
 
 <iframe
   src="plots/n-tags-hist.html"
-  width="750"
+  width="100%"
   height="550"
   frameborder="0"
 ></iframe>
@@ -267,7 +267,7 @@ For further exploration, I was curious about if there were any tags that became 
 
 <iframe
   src="plots/tag-props-line.html"
-  width="750"
+  width="100%"
   height="550"
   frameborder="0"
 ></iframe>
@@ -276,7 +276,7 @@ We can see that most tags don't have much usage, only making up less than 4% of 
 
 <iframe
   src="plots/top-5-line.html"
-  width="750"
+  width="100%"
   height="550"
   frameborder="0"
 ></iframe>
@@ -315,7 +315,7 @@ To see if my test statistic was significant, I conducted a permutation test and 
 
 <iframe
   src="plots/missingness-minutes-hist.html"
-  width="750"
+  width="100%"
   height="550"
   frameborder="0"
 ></iframe>
@@ -337,7 +337,7 @@ Again, to see if my test statistic was significant, I conducted a permutation te
 
 <iframe
   src="plots/missingness-tags-hist.html"
-  width="750"
+  width="100%"
   height="550"
   frameborder="0"
 ></iframe>
@@ -366,7 +366,7 @@ To see if my test statistic was significant, I ran 1,000 simulations to generate
 
 <iframe
   src="plots/hypothesis-test-hist.html"
-  width="750"
+  width="100%"
   height="550"
   frameborder="0"
 ></iframe>
@@ -424,7 +424,7 @@ After running 1,000 simulations to generate an empirical distribution of the tes
 
 <iframe
   src="plots/fairness-hist.html"
-  width="750"
+  width="100%"
   height="550"
   frameborder="0"
 ></iframe>
