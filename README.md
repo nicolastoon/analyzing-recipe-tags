@@ -1,4 +1,9 @@
-<head><link rel="stylesheet" href="style.css"></head>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta name="author" content="Nicolas Toon">
+  <meta name="description" content="A deep dive into how tags and content in recipes are related">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
 # Investigating the Significance of Recipe Tags
 <p style="text-align:center;">a DSC 80 project, conducted by Nicolas Toon</p>
@@ -301,12 +306,16 @@ I believe that the missingness of <code>'description'</code> is NMAR (not missin
 #### <b>Missingness Dependency</b>
 I suspect that the missingness of <code>'avg_rating'</code> is MAR (missing at random). In other words, the missingness of <code>'avg_rating'</code> is related to the values of another column. The first column I will investigate is <code>'minutes'</code>.
 
----
+<hr>
+<p></p>
 
 <p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the recipe time.</p>
 <p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the recipe time.</p>
 <p><b>Test Statistic: </b>The absolute difference in recipe time between rows missing and not missing <code>'avg_rating'</code>.</p>
 <p><b>Significance Level: </b>0.01</p>
+
+<hr>
+<p></p>
 
 The observed test statistic between recipes with and without a rating was approximately 117.34.
 
@@ -323,14 +332,16 @@ The p-value I calculated was 0.029, which is greater than the significance level
 
 So far, the missingness of <code>avg_rating</code> has not been proven to be MAR yet. However, let's test another variable: <code>n_tags</code>.
 
-<div>
+<hr>
+<p></p>
 
 <p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the number of tags.</p>
 <p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the number of tags.</p>
 <p><b>Test Statistic: </b>The absolute difference in the number of tags between rows missing and not missing <code>'avg_rating'</code>.</p>
 <p><b>Significance Level: </b>0.01</p>
 
-</div>
+<hr>
+<p></p>
 
 The observed test statistic between recipes with and without a rating was approximately 0.94.
 
@@ -354,10 +365,16 @@ For our hypothesis test, we will be running a permutation test since we want to 
 
 For our test statistic, I will use the absolute difference in mean calories. The absolute difference in means is useful because we have two groups, each with a quantitative mean that looks to be different from the other group. By comparing the simulated and observed test statistics, we can see if our observation is significant or not.
 
+<hr>
+<p></p>
+
 <p><b>Null Hypothesis: </b>Recipes with the <code>dietary</code> tag have the same amount of calories as recipes without the <code>dietary</code> tag.</p>
 <p><b>Alternate Hypothesis: </b>Recipes with the <code>dietary</code> tag have less calories as recipes without the <code>dietary</code> tag</p>
 <p><b>Test Statistic: </b>Absolute difference of mean calories between recipes with and without the <code>dietary</code> tag</p>
 <p><b>Significance Level: </b>0.01</p>
+
+<hr>
+<p></p>
 
 The observed test statistic between recipes with and without <code>'dietary'</code> was approximately 34.1.
 
@@ -410,10 +427,16 @@ For our measure of fairness, I decided to evaluate the accuracy parity. If the m
 
 We can measure the significance of the accuracy parity of the model using a permutation test.
 
+<hr>
+<p></p>
+
 <p><b>Null Hypothesis: </b>The accuracy of my model for high calorie recipes is the same compared to low calorie recipes.</p>
 <p><b>Alternate Hypothesis: </b>The accuracy of my model for high calorie recipes is not the same compared to low calorie recipes.</p>
 <p><b>Test Statistic: </b>Absolute difference in means</p>
 <p><b>Significance Level: </b>0.01</p>
+
+<hr>
+<p></p>
 
 The observed accuracy parity between the high calorie and low calorie recipes is about 0.197. This means that there was a 1.97% difference between the accuracies of the two groups.
 
