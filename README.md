@@ -1,3 +1,10 @@
+<head>
+  <style>
+    .table-wrapper {
+      overflow-x: scroll;
+    }
+  </style>
+</head>
 
 # Investigating the Significance of Recipe Tags
 <p style="text-align:center;">a DSC 80 project — Nicolas Toon</p>
@@ -183,6 +190,7 @@ To make the data exploration process easier, the following steps were executed, 
 </ol>
 
 The first five rows of the cleaned DataFrame are shown below:
+<div class="table-wrapper" markdown="block">
 
 | name                                 |     id |   minutes |   n_steps |   n_ingredients |   avg_rating |   n_ratings |   n_tags |   year |
 |:-------------------------------------|-------:|----------:|----------:|----------------:|-------------:|------------:|---------:|-------:|
@@ -192,6 +200,7 @@ The first five rows of the cleaned DataFrame are shown below:
 | millionaire pound cake               | 286009 |       120 |         7 |               7 |            5 |           1 |       20 |   2008 |
 | 2000 meatloaf                        | 475785 |        90 |        17 |              13 |            5 |           2 |       10 |   2012 |
 
+</div>
 Because the columns <code>'nutrition'</code>, <code>'ingredients'</code>, and <code>'tags'</code> are lists within the DataFrame, we extracted the lists into separate DataFrames, with row order preserved (so the first row of the new DataFrames will correspond to the same recipe as the first row of the cleaned DataFrame). In <code>ingredients_df</code> and <code>tags_df</code>, 1 represents that the recipe contains the ingredient/tag and 0 represents that the recipe does not contain the ingredient/tag.
 
 The first two rows of each new DataFrame are shown below:
@@ -229,7 +238,7 @@ To initially explore the data, I examined the distribution of ratings for recipe
 
 As the histogram shows, ratings are significantly skewed left. This implies that there are more recipes on that are rated a 4 through 5, compared to 0 through 4, creating a massive class imbalance.
 
----
+<p>---</p>
 
 I also examined the distribution of the number of tags for each recipe.
 
