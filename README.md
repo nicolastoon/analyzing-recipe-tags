@@ -286,15 +286,10 @@ The three tags mentioned earlier, <code>'preparation'</code>, <code>'time-to-mak
 #### <b>Interesting Aggregates</b>
 I was curious whether recipes with a certain tag had attributes that recipes without that tag didn't have. For this investigation, I utilized the <code>'dietary'</code> tag, and grouped recipes with and without the tag. Then, I took the mean of the nutritional values for each group. The aggregation is shown in the DataFrame below:
 
-<div class="table-wrapper" markdown="block">
-
 | dietary   |   calories (#) |   total fat (PDV) |   sugar (PDV) |   sodium (PDV) |   protein (PDV) |   saturated fat (PDV) |   carbohydrates (PDV) |
 |:----------|---------------:|------------------:|--------------:|---------------:|----------------:|----------------------:|----------------------:|
 | False     |          326.7 |                23 |            23 |             16 |              20 |                    26 |                     9 |
 | True      |          292.6 |                18 |            23 |             13 |              17 |                    18 |                     9 |
-
-</div>
-<p></p>
 
 The DataFrame shows that nutritional values in recipes with the <code>'dietary'</code> tag were consistently less than or equal to nutritional values in recipes without the <code>'dietary'</code> tag. This suggests that there is a difference between the two groups, but is this difference significant or not? We will investigate this in a bit.
 
@@ -307,7 +302,7 @@ I believe that the missingness of <code>'description'</code> is NMAR (not missin
 #### <b>Missingness Dependency</b>
 I suspect that the missingness of <code>'avg_rating'</code> is MAR (missing at random). In other words, the missingness of <code>'avg_rating'</code> is related to the values of another column. The first column I will investigate is <code>'minutes'</code>.
 
-<div class='hypothesis'>
+<div class="hypothesis" markdown="block">
 
 <p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the recipe time.</p>
 <p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the recipe time.</p>
@@ -331,7 +326,7 @@ The p-value I calculated was 0.029, which is greater than the significance level
 
 So far, the missingness of <code>avg_rating</code> has not been proven to be MAR yet. However, let's test another variable: <code>n_tags</code>.
 
-<div class='hypothesis'>
+<div class="hypothesis" markdown="block">
 
 <p><b>Null Hypothesis: </b>The missingness of <code>'avg_rating'</code> is not related to the number of tags.</p>
 <p><b>Alternate Hypothesis: </b>The missingness of <code>'avg_rating'</code> is related to the number of tags.</p>
@@ -362,7 +357,7 @@ For our hypothesis test, we will be running a permutation test since we want to 
 
 For our test statistic, I will use the absolute difference in mean calories. The absolute difference in means is useful because we have two groups, each with a quantitative mean that looks to be different from the other group. By comparing the simulated and observed test statistics, we can see if our observation is significant or not.
 
-<div class='hypothesis'>
+<div class="hypothesis" markdown="block">
 
 <p><b>Null Hypothesis: </b>Recipes with the <code>dietary</code> tag have the same amount of calories as recipes without the <code>dietary</code> tag.</p>
 <p><b>Alternate Hypothesis: </b>Recipes with the <code>dietary</code> tag have less calories as recipes without the <code>dietary</code> tag</p>
@@ -407,7 +402,7 @@ The model used the default hyperparameters for a random forest classifier accord
 ### <strong>Final Model</strong>
 A possibility that could increase the F1 score of the model is incorporating more features that help predict the response variable. Logically, when thinking about dietary recipes, one might consider eating healthier ingredients or not eating unhealthy ingredients. In the final model, I added five more features: <code>'salt'</code>, <code>'butter'</code>, <code>'sugar'</code>, <code>'olive oil'</code>, and <code>'vegetable oil'</code>. These were common ingredients in the dataset, and I considered these ingredients to play a significant part in healthy eating and decision making.
 
-Another possibility that could increase the F1 score of the model is tuning the hyperparameters of the model. Tuning the hyperparameters of the model is important for minimizing bias and increasing variance of the individual decision trees. This makes sure that when the decision trees are combined to make the random forest, the output has low bias and low variance. I also decided to tune specific hyperparameters: <code>'max_depth'</code> and <code>'min_samples_split'</code>. I picked these hyperparameters because they would control how similar each individual decision tree would be by limiting the variance. If the decision trees had no limit, eventually they would all reach the same decisions. By using GridSearchCV to iterate through various combinations of hyperparameters, the model was best fitted using <code>'max_depth'</code> = 30 and <code>'min_samples_split'</code> = 80.
+Another possibility that could increase the F1 score of the model is tuning the hyperparameters of the model. Tuning the hyperparameters of the model is important for minimizing bias and increasing variance of the individual decision trees. This makes sure that when the decision trees are combined to make the random forest, the output has low bias and low variance. I also decided to tune specific hyperparameters: <code>max_depth</code> and <code>min_samples_split</code>. I picked these hyperparameters because they would control how similar each individual decision tree would be by limiting the variance. If the decision trees had no limit, eventually they would all reach the same decisions. By using GridSearchCV to iterate through various combinations of hyperparameters, the model was best fitted using <code>max_depth=30</code> and <code>min_samples_split=80</code>.
 
 After fitting the final model to the same training set as the training model (so that variance in the results cannot be attributed to randomness), the model was evaluated to have an F1 score of 0.73 — an increase of about 6%.
 
@@ -422,7 +417,7 @@ For our measure of fairness, I decided to evaluate the accuracy parity. If the m
 
 We can measure the significance of the accuracy parity of the model using a permutation test.
 
-<div class='hypothesis'>
+<div class="hypothesis" markdown="block">
 
 <p><b>Null Hypothesis: </b>The accuracy of my model for high calorie recipes is the same compared to low calorie recipes.</p>
 <p><b>Alternate Hypothesis: </b>The accuracy of my model for high calorie recipes is not the same compared to low calorie recipes.</p>
@@ -431,7 +426,7 @@ We can measure the significance of the accuracy parity of the model using a perm
 
 </div>
 
-The observed accuracy parity between the high calorie and low calorie recipes is about 0.197. This means that there was a 1.97% difference between the accuracies of the two groups.
+The observed accuracy parity between the high calorie and low calorie recipes is about 0.0197. This means that there was a 1.97% difference between the accuracies of the two groups.
 
 After running 1,000 simulations to generate an empirical distribution of the test statistic under the null hypothesis, I plotted the following histogram:
 
