@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-# Investigating the Significance of Recipe Tags
+# Recipe Representation
 <p style="text-align:center;">a DSC 80 project, conducted by Nicolas Toon</p>
 
 ### <strong>Introduction</strong>
